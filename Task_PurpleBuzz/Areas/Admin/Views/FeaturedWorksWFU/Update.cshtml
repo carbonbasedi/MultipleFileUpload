@@ -1,0 +1,68 @@
+﻿@using Task_PurpleBuzz.Areas.Admin.ViewModels.FeaturedWorkWFU;
+@model FeaturedWorkWFUUpdateVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+	<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800">Update Feartured Work</h1>
+
+	<!-- DataTales Example -->
+	<div class="card shadow mb-4">
+		<div class="card-body">
+			<form enctype="multipart/form-data" asp-action="create" asp-controller="featured-work-wfu" method="post">
+				<div class="form-group">
+					<label asp-for="Description"></label>
+					<textarea class="form-control" asp-for="Description"></textarea>
+					<span asp-validation-for="Description"></span>
+				</div>
+				<div class="form-group">
+					<label class="form-label" asp-for="Photos"></label></br>
+					<input type="file" multiple class="form-label" asp-for="Photos">
+					<span asp-validation-for="Photos"></span>
+				</div>
+				<button type="submit" class="btn btn-primary">Update</button>
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Photo</th>
+								<th>Order</th>
+								<th>Created At</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var photo in Model.FeaturedWorkPhotoWFUs)
+							{
+								<tr>
+									<td><img class="w-25" src="~/assets/img/@photo.Name"></td>
+									<td>@photo.Order</td>
+									<td>@photo.CreatedAt.ToString("dd.MM.yyyy HH:mm:ss")</td>
+									<td>
+										<a class="btn btn-primary">Update</a>
+										<a onclick="return DeleteConfirmation()" class="btn btn-danger">Delete</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</div>
+<!-- /.container-fluid -->
+@section Scripts{
+	<script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+	<script>
+		ClassicEditor
+			.create(document.querySelector('#Description'))
+			.catch(error => {
+				console.error(error);
+			});
+	</script>
+
+}

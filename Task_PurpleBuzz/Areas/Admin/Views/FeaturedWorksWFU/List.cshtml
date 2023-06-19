@@ -1,0 +1,45 @@
+﻿@using Task_PurpleBuzz.Areas.Admin.ViewModels.FeaturedWorkWFU
+@model FeaturedWorkWFUListVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+	<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800">Featured Work</h1>
+	@if (Model.FeaturedWorkWFU is null)
+	{
+		<a class="btn btn-primary m-3" asp-action="create" asp-controller="featured-work-wfu">Create</a>
+	}
+	<!-- DataTales Example -->
+	@if (Model.FeaturedWorkWFU is not null)
+	{
+		<div class="card shadow mb-4">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Created At</th>
+								<th>Modified At</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>@Model.FeaturedWorkWFU.Id</td>
+								<td>@Model.FeaturedWorkWFU.CreatedAt.ToString("dd.MM.yyyy HH:mm:ss")</td>
+								<td>@Model.FeaturedWorkWFU.ModifiedAt?.ToString("dd.MM.yyyy HH:mm:ss")</td>
+								<td>
+									<a asp-action="update" asp-controller="featured-work-wfu" asp-route-id="@Model.FeaturedWorkWFU.Id" class="btn btn-primary">Update</a>
+									<a onclick="return DeleteConfirmation()" asp-action="delete" asp-controller="featured-work-wfu" asp-route-id="@Model.FeaturedWorkWFU.Id" class="btn btn-danger">Delete</a>
+									<a asp-action="details" asp-controller="featured-work-wfu" asp-route-id="@Model.FeaturedWorkWFU.Id" class="btn btn-info">Details</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+<!-- /.container-fluid -->
